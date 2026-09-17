@@ -18,10 +18,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from core.views import home, te_saludo
+from core.views import ejercicio4, home, te_saludo
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("te-saludo/", te_saludo),
     path("", home),
+    path("ejercicio4/", ejercicio4),
 ]
