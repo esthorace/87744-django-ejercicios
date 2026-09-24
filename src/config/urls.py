@@ -19,10 +19,12 @@ from django.contrib import admin
 from django.urls import path
 
 from core.views import ejercicio4, home, te_saludo
+from servicio.views import categoriaservicio_list
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("te-saludo/", te_saludo),
     path("", home),
     path("ejercicio4/", ejercicio4),
+    path("categoria/list/", categoriaservicio_list),
 ]
