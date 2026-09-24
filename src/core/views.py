@@ -14,7 +14,7 @@ def home(request):
     return render(request, "core/home.html", {"notas": lista_notas})
 
 
-def ejercicio4(request):
+def ejercicio_4(request):
     usuarios = [
         {"nombre": "juan", "email": "juan@django"},
         {"nombre": "santi", "email": "juan@django"},

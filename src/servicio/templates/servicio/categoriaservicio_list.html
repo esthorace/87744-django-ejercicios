@@ -10,5 +10,7 @@
         {% for categoria in categorias %}
             <p>{{ categoria.nombre }}</p>
         {% endfor %}
+        <br />
+        <a href="{% url 'core:home' %}">Inicio</a>
     </body>
 </html>
