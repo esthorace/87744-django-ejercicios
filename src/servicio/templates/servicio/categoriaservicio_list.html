@@ -6,7 +6,9 @@
         <title>Document</title>
     </head>
     <body>
-        <h1>Lista de notas</h1>
-        <p>{{ notas }}</p>
+        <h1>Categoría de Servicios - Lista</h1>
+        {% for categoria in categorias %}
+            <p>{{ categoria.nombre }}</p>
+        {% endfor %}
     </body>
 </html>
