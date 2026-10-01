@@ -1,9 +1,10 @@
 from django.urls import path
 
-from servicio.views import categoriaservicio_list
+from servicio import views
 
 app_name = "servicio"
 
 urlpatterns = [
-    path("categoria/list/", categoriaservicio_list, name="categoria_list"),
+    path("", views.home, name="home"),
+    path("categoria/list/", views.categoriaservicio_list, name="categoriaservicio_list"),
 ]

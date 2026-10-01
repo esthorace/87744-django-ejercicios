@@ -830,7 +830,7 @@
                 </nav>
                 <div class="nav-actions">
                     <!-- En Django, este enlace puede llevar a /login/ -->
-                    <a class="nav-login" href="/login/">Acceder</a>
+                    <a class="nav-login" href="{% url 'servicio:home' %}">Acceder</a>
                     <a class="btn btn-primary" href="#contacto">Solicitar servicio</a>
                     <details class="mobile-nav">
                         <summary aria-label="Abrir menú">
