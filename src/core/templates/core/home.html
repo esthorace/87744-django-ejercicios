@@ -1,1094 +1,288 @@
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description"
-              content="Servicios profesionales para el cuidado, mantenimiento y mejora del hogar." />
-        <title>CasaListo — Servicios para tu hogar</title>
-        <style>
-            :root {
-                --bg: #f7f8f5;
-                --surface: #ffffff;
-                --surface-soft: #eef2ec;
-                --text: #18211c;
-                --muted: #68736c;
-                --primary: #215c4a;
-                --primary-dark: #174637;
-                --accent: #dcefd5;
-                --border: #e1e6e1;
-                --shadow: 0 18px 45px rgba(24, 33, 28, 0.08);
-                --radius-lg: 28px;
-                --radius-md: 18px;
-                --radius-sm: 12px;
-                --max-width: 1180px;
-            }
-
-            * {
-                box-sizing: border-box;
-            }
-
-            html {
-                scroll-behavior: smooth;
-            }
-
-            body {
-                margin: 0;
-                font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-                color: var(--text);
-                background: var(--bg);
-                line-height: 1.6;
-            }
-
-            a {
-                color: inherit;
-                text-decoration: none;
-            }
-
-            img,
-            svg {
-                display: block;
-                max-width: 100%;
-            }
-
-            button,
-            a {
-                -webkit-tap-highlight-color: transparent;
-            }
-
-            .container {
-                width: min(100% - 40px, var(--max-width));
-                margin-inline: auto;
-            }
-
-            /* NAVBAR */
-            .site-header {
-                position: sticky;
-                top: 0;
-                z-index: 50;
-                background: rgba(247, 248, 245, 0.88);
-                backdrop-filter: blur(14px);
-                border-bottom: 1px solid rgba(225, 230, 225, 0.85);
-            }
-
-            .nav {
-                min-height: 76px;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 24px;
-            }
-
-            .brand {
-                display: inline-flex;
-                align-items: center;
-                gap: 10px;
-                font-weight: 800;
-                letter-spacing: -0.04em;
-                font-size: 1.2rem;
-            }
-
-            .brand-mark {
-                width: 38px;
-                height: 38px;
-                border-radius: 11px;
-                display: grid;
-                place-items: center;
-                background: var(--primary);
-                color: white;
-                box-shadow: 0 10px 25px rgba(33, 92, 74, 0.22);
-            }
-
-            .brand-mark svg {
-                width: 20px;
-            }
-
-            .nav-links {
-                display: flex;
-                align-items: center;
-                gap: 28px;
-                color: #4f5a53;
-                font-size: 0.94rem;
-                font-weight: 600;
-            }
-
-            .nav-links a {
-                transition: color .2s ease;
-            }
-
-            .nav-links a:hover {
-                color: var(--primary);
-            }
-
-            .nav-actions {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-            }
-
-            .nav-login {
-                padding: 10px 14px;
-                color: #4f5a53;
-                font-weight: 700;
-                font-size: .9rem;
-            }
-
-            .btn {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                gap: 8px;
-                min-height: 46px;
-                padding: 0 18px;
-                border-radius: 999px;
-                border: 1px solid transparent;
-                font-size: .92rem;
-                font-weight: 800;
-                transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
-            }
-
-            .btn:hover {
-                transform: translateY(-2px);
-            }
-
-            .btn-primary {
-                background: var(--primary);
-                color: white;
-                box-shadow: 0 12px 28px rgba(33, 92, 74, .18);
-            }
-
-            .btn-primary:hover {
-                background: var(--primary-dark);
-            }
-
-            .btn-light {
-                background: white;
-                border-color: var(--border);
-                color: var(--text);
-            }
-
-            .mobile-nav {
-                display: none;
-            }
-
-            /* HERO */
-            .hero {
-                padding: 74px 0 56px;
-                overflow: hidden;
-            }
-
-            .hero-grid {
-                display: grid;
-                grid-template-columns: 1.07fr .93fr;
-                gap: 54px;
-                align-items: center;
-            }
-
-            .eyebrow {
-                display: inline-flex;
-                align-items: center;
-                gap: 8px;
-                padding: 7px 11px;
-                margin-bottom: 18px;
-                border: 1px solid #d8e5d5;
-                border-radius: 999px;
-                background: #edf6ea;
-                color: var(--primary);
-                font-size: .78rem;
-                font-weight: 800;
-                text-transform: uppercase;
-                letter-spacing: .08em;
-            }
-
-            .eyebrow-dot {
-                width: 7px;
-                height: 7px;
-                border-radius: 50%;
-                background: #5d9a6f;
-            }
-
-            h1 {
-                margin: 0;
-                max-width: 680px;
-                font-size: clamp(3rem, 6vw, 5.5rem);
-                line-height: .98;
-                letter-spacing: -.065em;
-            }
-
-            .hero-copy {
-                max-width: 590px;
-                margin: 22px 0 30px;
-                color: var(--muted);
-                font-size: 1.08rem;
-            }
-
-            .hero-actions {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 12px;
-                margin-bottom: 34px;
-            }
-
-            .trust-row {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 20px;
-                color: #526057;
-                font-size: .9rem;
-                font-weight: 700;
-            }
-
-            .trust-item {
-                display: inline-flex;
-                align-items: center;
-                gap: 8px;
-            }
-
-            .trust-icon {
-                width: 22px;
-                height: 22px;
-                display: grid;
-                place-items: center;
-                border-radius: 50%;
-                background: var(--accent);
-                color: var(--primary);
-                font-size: .8rem;
-                font-weight: 900;
-            }
-
-            .hero-visual {
-                position: relative;
-                min-height: 530px;
-                border-radius: 36px;
-                overflow: hidden;
-                background:
-                    radial-gradient(circle at 75% 20%, rgba(255, 255, 255, .88), transparent 24%),
-                    linear-gradient(145deg, #dce9db 0%, #b9d0bf 46%, #8eaa94 100%);
-                box-shadow: var(--shadow);
-            }
-
-            .hero-visual::before {
-                content: "";
-                position: absolute;
-                width: 290px;
-                height: 290px;
-                left: -100px;
-                bottom: -120px;
-                border-radius: 50%;
-                background: rgba(255, 255, 255, .34);
-            }
-
-            .hero-home {
-                position: absolute;
-                inset: auto 7% 0;
-                height: 73%;
-                display: flex;
-                align-items: flex-end;
-                justify-content: center;
-            }
-
-            .house {
-                position: relative;
-                width: 76%;
-                height: 60%;
-                border-radius: 10px 10px 0 0;
-                background: #f3eee5;
-                border: 7px solid rgba(255, 255, 255, .62);
-                box-shadow: 0 30px 55px rgba(52, 74, 58, .18);
-            }
-
-            .roof {
-                position: absolute;
-                width: 118%;
-                height: 42%;
-                left: -9%;
-                top: -29%;
-                background: #31443a;
-                clip-path: polygon(50% 0, 100% 100%, 0 100%);
-                border-radius: 6px;
-            }
-
-            .window {
-                position: absolute;
-                width: 21%;
-                aspect-ratio: 1;
-                top: 27%;
-                background: #a8ced1;
-                border: 6px solid #fff;
-                box-shadow: inset 0 0 0 3px rgba(49, 68, 58, .13);
-            }
-
-            .window.left {
-                left: 14%;
-            }
-
-            .window.right {
-                right: 14%;
-            }
-
-            .window::after {
-                content: "";
-                position: absolute;
-                inset: 50% auto auto 0;
-                width: 100%;
-                height: 4px;
-                transform: translateY(-50%);
-                background: rgba(255, 255, 255, .8);
-            }
-
-            .door {
-                position: absolute;
-                width: 23%;
-                height: 49%;
-                left: 50%;
-                bottom: 0;
-                transform: translateX(-50%);
-                background: #6b735e;
-                border: 5px solid #fff;
-                border-bottom: 0;
-                border-radius: 10px 10px 0 0;
-            }
-
-            .door::after {
-                content: "";
-                position: absolute;
-                right: 14%;
-                top: 53%;
-                width: 7px;
-                aspect-ratio: 1;
-                border-radius: 50%;
-                background: #e8cc8b;
-            }
-
-            .lawn {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                height: 20%;
-                background: #70906f;
-                clip-path: ellipse(75% 70% at 50% 100%);
-            }
-
-            .service-float {
-                position: absolute;
-                left: 6%;
-                top: 9%;
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                max-width: 230px;
-                padding: 13px 15px;
-                background: rgba(255, 255, 255, .92);
-                border: 1px solid rgba(255, 255, 255, .75);
-                border-radius: 17px;
-                box-shadow: 0 18px 40px rgba(37, 55, 44, .14);
-            }
-
-            .service-float-icon {
-                width: 40px;
-                height: 40px;
-                display: grid;
-                place-items: center;
-                border-radius: 12px;
-                background: var(--accent);
-                color: var(--primary);
-                flex: 0 0 auto;
-            }
-
-            .service-float strong {
-                display: block;
-                font-size: .86rem;
-            }
-
-            .service-float span {
-                display: block;
-                color: var(--muted);
-                font-size: .77rem;
-            }
-
-            .rating-float {
-                position: absolute;
-                right: 6%;
-                bottom: 8%;
-                padding: 14px 16px;
-                border-radius: 17px;
-                background: rgba(28, 46, 37, .91);
-                color: white;
-                box-shadow: 0 18px 40px rgba(31, 50, 40, .18);
-            }
-
-            .rating-float strong {
-                display: block;
-                font-size: 1.12rem;
-            }
-
-            .rating-float span {
-                display: block;
-                color: #dce9df;
-                font-size: .78rem;
-                margin-top: 2px;
-            }
-
-            /* SECTIONS */
-            section {
-                padding: 88px 0;
-            }
-
-            .section-head {
-                display: flex;
-                align-items: end;
-                justify-content: space-between;
-                gap: 30px;
-                margin-bottom: 34px;
-            }
-
-            .section-kicker {
-                margin: 0 0 8px;
-                color: var(--primary);
-                font-size: .78rem;
-                font-weight: 800;
-                letter-spacing: .1em;
-                text-transform: uppercase;
-            }
-
-            h2 {
-                margin: 0;
-                font-size: clamp(2rem, 4vw, 3.4rem);
-                line-height: 1.03;
-                letter-spacing: -.055em;
-            }
-
-            .section-subtitle {
-                max-width: 520px;
-                margin: 0;
-                color: var(--muted);
-            }
-
-            .services-grid {
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 16px;
-            }
-
-            .service-card {
-                position: relative;
-                min-height: 300px;
-                padding: 24px;
-                border-radius: var(--radius-lg);
-                background: var(--surface);
-                border: 1px solid var(--border);
-                overflow: hidden;
-                transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
-            }
-
-            .service-card:hover {
-                transform: translateY(-6px);
-                box-shadow: var(--shadow);
-                border-color: #cbd6cc;
-            }
-
-            .service-card:nth-child(2),
-            .service-card:nth-child(4) {
-                background: #f0f5ed;
-            }
-
-            .service-number {
-                color: #a2aea5;
-                font-size: .78rem;
-                font-weight: 800;
-                letter-spacing: .08em;
-            }
-
-            .service-icon {
-                width: 54px;
-                height: 54px;
-                display: grid;
-                place-items: center;
-                margin: 34px 0 22px;
-                border-radius: 16px;
-                background: var(--accent);
-                color: var(--primary);
-            }
-
-            .service-icon svg {
-                width: 28px;
-                height: 28px;
-            }
-
-            .service-card h3 {
-                margin: 0 0 7px;
-                font-size: 1.25rem;
-                letter-spacing: -.025em;
-            }
-
-            .service-card p {
-                margin: 0;
-                color: var(--muted);
-                font-size: .91rem;
-            }
-
-            .service-arrow {
-                position: absolute;
-                right: 22px;
-                bottom: 20px;
-                width: 38px;
-                height: 38px;
-                display: grid;
-                place-items: center;
-                border: 1px solid var(--border);
-                border-radius: 50%;
-                background: white;
-            }
-
-            .service-arrow svg {
-                width: 16px;
-            }
-
-            .workflow {
-                background: #18211c;
-                color: white;
-            }
-
-            .workflow .section-subtitle {
-                color: #aab6ae;
-            }
-
-            .workflow .section-kicker {
-                color: #a9d7ae;
-            }
-
-            .steps {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 18px;
-                margin-top: 38px;
-            }
-
-            .step {
-                padding: 26px;
-                border: 1px solid rgba(255, 255, 255, .11);
-                border-radius: 22px;
-                background: rgba(255, 255, 255, .045);
-            }
-
-            .step-number {
-                width: 38px;
-                height: 38px;
-                display: grid;
-                place-items: center;
-                border-radius: 50%;
-                background: #dcefd5;
-                color: #214b3c;
-                font-weight: 900;
-                margin-bottom: 36px;
-            }
-
-            .step h3 {
-                margin: 0 0 8px;
-                font-size: 1.18rem;
-            }
-
-            .step p {
-                margin: 0;
-                color: #aab6ae;
-                font-size: .92rem;
-            }
-
-            .cta-section {
-                padding-top: 72px;
-            }
-
-            .cta {
-                position: relative;
-                overflow: hidden;
-                display: grid;
-                grid-template-columns: 1.3fr .7fr;
-                gap: 30px;
-                align-items: center;
-                padding: 54px;
-                border-radius: 32px;
-                background: #dcefd5;
-            }
-
-            .cta::after {
-                content: "";
-                position: absolute;
-                width: 330px;
-                height: 330px;
-                right: -110px;
-                top: -150px;
-                border-radius: 50%;
-                border: 65px solid rgba(33, 92, 74, .08);
-            }
-
-            .cta h2 {
-                max-width: 670px;
-            }
-
-            .cta p {
-                max-width: 620px;
-                color: #566258;
-                margin: 15px 0 0;
-            }
-
-            .cta-action {
-                position: relative;
-                z-index: 1;
-                justify-self: end;
-            }
-
-            /* FOOTER */
-            footer {
-                padding: 28px 0 34px;
-            }
-
-            .footer-inner {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 18px;
-                padding-top: 24px;
-                border-top: 1px solid var(--border);
-                color: var(--muted);
-                font-size: .86rem;
-            }
-
-            .footer-links {
-                display: flex;
-                gap: 18px;
-            }
-
-            .footer-links a:hover {
-                color: var(--primary);
-            }
-
-            @media (max-width: 980px) {
-                .nav-links {
-                    display: none;
-                }
-
-                .mobile-nav {
-                    display: block;
-                    position: relative;
-                }
-
-                .mobile-nav summary {
-                    list-style: none;
-                    width: 42px;
-                    height: 42px;
-                    display: grid;
-                    place-items: center;
-                    border: 1px solid var(--border);
-                    border-radius: 12px;
-                    background: white;
-                    cursor: pointer;
-                }
-
-                .mobile-nav summary::-webkit-details-marker {
-                    display: none;
-                }
-
-                .mobile-menu {
-                    position: absolute;
-                    right: 0;
-                    top: 52px;
-                    width: 220px;
-                    padding: 10px;
-                    border: 1px solid var(--border);
-                    border-radius: 16px;
-                    background: white;
-                    box-shadow: var(--shadow);
-                }
-
-                .mobile-menu a {
-                    display: block;
-                    padding: 11px 12px;
-                    border-radius: 10px;
-                    font-weight: 700;
-                }
-
-                .mobile-menu a:hover {
-                    background: var(--surface-soft);
-                }
-
-                .hero-grid {
-                    grid-template-columns: 1fr;
-                }
-
-                .hero-copy {
-                    max-width: 720px;
-                }
-
-                .hero-visual {
-                    min-height: 470px;
-                }
-
-                .services-grid {
-                    grid-template-columns: repeat(2, 1fr);
-                }
-
-                .cta {
-                    grid-template-columns: 1fr;
-                }
-
-                .cta-action {
-                    justify-self: start;
-                }
-            }
-
-            @media (max-width: 640px) {
-                .container {
-                    width: min(100% - 28px, var(--max-width));
-                }
-
-                .nav {
-                    min-height: 68px;
-                }
-
-                .nav-actions .btn {
-                    display: none;
-                }
-
-                .hero {
-                    padding: 54px 0 35px;
-                }
-
-                h1 {
-                    font-size: clamp(2.7rem, 15vw, 4.2rem);
-                }
-
-                .hero-visual {
-                    min-height: 380px;
-                    border-radius: 26px;
-                }
-
-                .house {
-                    width: 78%;
-                    height: 55%;
-                }
-
-                section {
-                    padding: 64px 0;
-                }
-
-                .section-head {
-                    display: block;
-                }
-
-                .section-subtitle {
-                    margin-top: 12px;
-                }
-
-                .services-grid,
-                .steps {
-                    grid-template-columns: 1fr;
-                }
-
-                .service-card {
-                    min-height: 250px;
-                }
-
-                .cta {
-                    padding: 34px 24px;
-                    border-radius: 24px;
-                }
-
-                .footer-inner {
-                    flex-direction: column;
-                    align-items: flex-start;
-                }
-
-                .footer-links {
-                    flex-wrap: wrap;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <header class="site-header">
-            <div class="container nav">
-                <a class="brand" href="#inicio" aria-label="CasaListo inicio">
-                    <span class="brand-mark" aria-hidden="true">
-                        <svg viewBox="0 0 24 24"
+{% extends "core/base.html" %}
+
+{% block content %}
+    <header class="site-header">
+        <div class="container nav">
+            <a class="brand" href="#inicio" aria-label="CasaListo inicio">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path d="M3 11.5 12 4l9 7.5"></path>
+                        <path d="M5.5 10.5V20h13v-9.5"></path>
+                        <path d="M9 20v-5h6v5"></path>
+                    </svg>
+                </span>
+                CasaListo
+            </a>
+            <nav class="nav-links" aria-label="Navegación principal">
+                <a href="#servicios">Servicios</a>
+                <a href="#como-funciona">Cómo funciona</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+            <div class="nav-actions">
+                <!-- En Django, este enlace puede llevar a /login/ -->
+                <a class="nav-login" href="{% url 'servicio:home' %}">Acceder</a>
+                <a class="btn btn-primary" href="#contacto">Solicitar servicio</a>
+                <details class="mobile-nav">
+                    <summary aria-label="Abrir menú">
+                        <svg width="20"
+                             height="20"
+                             viewBox="0 0 24 24"
                              fill="none"
                              stroke="currentColor"
                              stroke-width="2"
-                             stroke-linecap="round"
-                             stroke-linejoin="round">
-                            <path d="M3 11.5 12 4l9 7.5"></path>
-                            <path d="M5.5 10.5V20h13v-9.5"></path>
-                            <path d="M9 20v-5h6v5"></path>
+                             stroke-linecap="round">
+                            <path d="M4 7h16M4 12h16M4 17h16"></path>
                         </svg>
-                    </span>
-                    CasaListo
-                </a>
-                <nav class="nav-links" aria-label="Navegación principal">
-                    <a href="#servicios">Servicios</a>
-                    <a href="#como-funciona">Cómo funciona</a>
-                    <a href="#contacto">Contacto</a>
-                </nav>
-                <div class="nav-actions">
-                    <!-- En Django, este enlace puede llevar a /login/ -->
-                    <a class="nav-login" href="{% url 'servicio:home' %}">Acceder</a>
-                    <a class="btn btn-primary" href="#contacto">Solicitar servicio</a>
-                    <details class="mobile-nav">
-                        <summary aria-label="Abrir menú">
-                            <svg width="20"
-                                 height="20"
+                    </summary>
+                    <div class="mobile-menu">
+                        <a href="#servicios">Servicios</a>
+                        <a href="#como-funciona">Cómo funciona</a>
+                        <a href="#contacto">Contacto</a>
+                        <a href="/login/">Acceder</a>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </header>
+    <main id="inicio">
+        <section class="hero">
+            <div class="container hero-grid">
+                <div>
+                    <div class="eyebrow"><span class="eyebrow-dot"></span> Cuidado del hogar, sin complicaciones</div>
+                    <h1>Todo lo que tu casa necesita.</h1>
+                    <p class="hero-copy">
+                        Conecta con servicios para mantener, reparar y mejorar tu hogar. Encuentra la ayuda que necesitas de forma simple, clara y cercana.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" href="#servicios">Ver servicios</a>
+                        <a class="btn btn-light" href="#como-funciona">Cómo funciona</a>
+                    </div>
+                    <div class="trust-row" aria-label="Beneficios">
+                        <span class="trust-item"><span class="trust-icon">✓</span> Profesionales</span>
+                        <span class="trust-item"><span class="trust-icon">✓</span> Atención rápida</span>
+                        <span class="trust-item"><span class="trust-icon">✓</span> Servicio cercano</span>
+                    </div>
+                </div>
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="service-float">
+                        <div class="service-float-icon">
+                            <svg width="22"
+                                 height="22"
                                  viewBox="0 0 24 24"
                                  fill="none"
                                  stroke="currentColor"
                                  stroke-width="2"
-                                 stroke-linecap="round">
-                                <path d="M4 7h16M4 12h16M4 17h16"></path>
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <path d="M14 7a5 5 0 0 0-6.5 6.5L3 18l3 3 4.5-4.5A5 5 0 0 0 17 10"></path>
+                                <path d="m14 7 3-3 3 3-3 3"></path>
                             </svg>
-                        </summary>
-                        <div class="mobile-menu">
-                            <a href="#servicios">Servicios</a>
-                            <a href="#como-funciona">Cómo funciona</a>
-                            <a href="#contacto">Contacto</a>
-                            <a href="/login/">Acceder</a>
                         </div>
-                    </details>
+                        <div>
+                            <strong>Servicio para tu hogar</strong>
+                            <span>Fácil de solicitar</span>
+                        </div>
+                    </div>
+                    <div class="hero-home">
+                        <div class="house">
+                            <div class="roof"></div>
+                            <div class="window left"></div>
+                            <div class="window right"></div>
+                            <div class="door"></div>
+                        </div>
+                    </div>
+                    <div class="lawn"></div>
+                    <div class="rating-float">
+                        <strong>★ 4.9 / 5</strong>
+                        <span>Experiencia del servicio</span>
+                    </div>
                 </div>
             </div>
-        </header>
-        <main id="inicio">
-            <section class="hero">
-                <div class="container hero-grid">
+        </section>
+        <section id="servicios">
+            <div class="container">
+                <div class="section-head">
                     <div>
-                        <div class="eyebrow"><span class="eyebrow-dot"></span> Cuidado del hogar, sin complicaciones</div>
-                        <h1>Todo lo que tu casa necesita.</h1>
-                        <p class="hero-copy">
-                            Conecta con servicios para mantener, reparar y mejorar tu hogar. Encuentra la ayuda que necesitas de forma simple, clara y cercana.
-                        </p>
-                        <div class="hero-actions">
-                            <a class="btn btn-primary" href="#servicios">Ver servicios</a>
-                            <a class="btn btn-light" href="#como-funciona">Cómo funciona</a>
-                        </div>
-                        <div class="trust-row" aria-label="Beneficios">
-                            <span class="trust-item"><span class="trust-icon">✓</span> Profesionales</span>
-                            <span class="trust-item"><span class="trust-icon">✓</span> Atención rápida</span>
-                            <span class="trust-item"><span class="trust-icon">✓</span> Servicio cercano</span>
-                        </div>
+                        <p class="section-kicker">Nuestros servicios</p>
+                        <h2>Soluciones para cada rincón de tu casa.</h2>
                     </div>
-                    <div class="hero-visual" aria-hidden="true">
-                        <div class="service-float">
-                            <div class="service-float-icon">
-                                <svg width="22"
-                                     height="22"
-                                     viewBox="0 0 24 24"
-                                     fill="none"
-                                     stroke="currentColor"
-                                     stroke-width="2"
-                                     stroke-linecap="round"
-                                     stroke-linejoin="round">
-                                    <path d="M14 7a5 5 0 0 0-6.5 6.5L3 18l3 3 4.5-4.5A5 5 0 0 0 17 10"></path>
-                                    <path d="m14 7 3-3 3 3-3 3"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <strong>Servicio para tu hogar</strong>
-                                <span>Fácil de solicitar</span>
-                            </div>
-                        </div>
-                        <div class="hero-home">
-                            <div class="house">
-                                <div class="roof"></div>
-                                <div class="window left"></div>
-                                <div class="window right"></div>
-                                <div class="door"></div>
-                            </div>
-                        </div>
-                        <div class="lawn"></div>
-                        <div class="rating-float">
-                            <strong>★ 4.9 / 5</strong>
-                            <span>Experiencia del servicio</span>
-                        </div>
-                    </div>
+                    <p class="section-subtitle">
+                        Elige una categoría y encuentra el servicio que necesitas para mantener tu hogar funcionando y luciendo bien.
+                    </p>
                 </div>
-            </section>
-            <section id="servicios">
-                <div class="container">
-                    <div class="section-head">
-                        <div>
-                            <p class="section-kicker">Nuestros servicios</p>
-                            <h2>Soluciones para cada rincón de tu casa.</h2>
+                <div class="services-grid">
+                    <a class="service-card" href="/servicios/plomeria/">
+                        <span class="service-number">01</span>
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="1.8"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <path d="M6 4v8a6 6 0 0 0 12 0V9"></path>
+                                <path d="M6 8h5"></path>
+                                <path d="M3 4h6"></path>
+                                <path d="M15 5h5"></path>
+                                <path d="M17 2v6"></path>
+                            </svg>
                         </div>
-                        <p class="section-subtitle">
-                            Elige una categoría y encuentra el servicio que necesitas para mantener tu hogar funcionando y luciendo bien.
-                        </p>
-                    </div>
-                    <div class="services-grid">
-                        <a class="service-card" href="/servicios/plomeria/">
-                            <span class="service-number">01</span>
-                            <div class="service-icon">
-                                <svg viewBox="0 0 24 24"
-                                     fill="none"
-                                     stroke="currentColor"
-                                     stroke-width="1.8"
-                                     stroke-linecap="round"
-                                     stroke-linejoin="round">
-                                    <path d="M6 4v8a6 6 0 0 0 12 0V9"></path>
-                                    <path d="M6 8h5"></path>
-                                    <path d="M3 4h6"></path>
-                                    <path d="M15 5h5"></path>
-                                    <path d="M17 2v6"></path>
-                                </svg>
-                            </div>
-                            <h3>Plomería</h3>
-                            <p>Reparaciones, fugas, grifería y mantenimiento de instalaciones de agua.</p>
-                            <span class="service-arrow" aria-hidden="true">
-                                <svg viewBox="0 0 24 24"
-                                     fill="none"
-                                     stroke="currentColor"
-                                     stroke-width="2"
-                                     stroke-linecap="round"
-                                     stroke-linejoin="round">
-                                    <path d="M5 12h14M13 6l6 6-6 6"></path>
-                                </svg>
-                            </span>
-                        </a>
-                        <a class="service-card" href="/servicios/electricidad/">
-                            <span class="service-number">02</span>
-                            <div class="service-icon">
-                                <svg viewBox="0 0 24 24"
-                                     fill="none"
-                                     stroke="currentColor"
-                                     stroke-width="1.8"
-                                     stroke-linecap="round"
-                                     stroke-linejoin="round">
-                                    <path d="M13 2 4 14h7l-1 8 10-13h-7l0-7z"></path>
-                                </svg>
-                            </div>
-                            <h3>Electricidad</h3>
-                            <p>Instalaciones, luminarias, tomacorrientes y mantenimiento eléctrico del hogar.</p>
-                            <span class="service-arrow" aria-hidden="true">
-                                <svg viewBox="0 0 24 24"
-                                     fill="none"
-                                     stroke="currentColor"
-                                     stroke-width="2"
-                                     stroke-linecap="round"
-                                     stroke-linejoin="round">
-                                    <path d="M5 12h14M13 6l6 6-6 6"></path>
-                                </svg>
-                            </span>
-                        </a>
-                        <a class="service-card" href="/servicios/pintura/">
-                            <span class="service-number">03</span>
-                            <div class="service-icon">
-                                <svg viewBox="0 0 24 24"
-                                     fill="none"
-                                     stroke="currentColor"
-                                     stroke-width="1.8"
-                                     stroke-linecap="round"
-                                     stroke-linejoin="round">
-                                    <path d="M4 6h11a3 3 0 0 1 3 3v1H4V6z"></path>
-                                    <path d="M8 10v8"></path>
-                                    <path d="M8 18c0 2-1 3-3 4"></path>
-                                    <path d="M16 10v4"></path>
-                                </svg>
-                            </div>
-                            <h3>Pintura</h3>
-                            <p>Pintura interior y exterior, retoques y renovación de ambientes.</p>
-                            <span class="service-arrow" aria-hidden="true">
-                                <svg viewBox="0 0 24 24"
-                                     fill="none"
-                                     stroke="currentColor"
-                                     stroke-width="2"
-                                     stroke-linecap="round"
-                                     stroke-linejoin="round">
-                                    <path d="M5 12h14M13 6l6 6-6 6"></path>
-                                </svg>
-                            </span>
-                        </a>
-                        <a class="service-card" href="/servicios/jardineria/">
-                            <span class="service-number">04</span>
-                            <div class="service-icon">
-                                <svg viewBox="0 0 24 24"
-                                     fill="none"
-                                     stroke="currentColor"
-                                     stroke-width="1.8"
-                                     stroke-linecap="round"
-                                     stroke-linejoin="round">
-                                    <path d="M12 21V10"></path>
-                                    <path d="M12 12c-4.5 0-7-2.4-7-6 4.7 0 7 2.1 7 6z"></path>
-                                    <path d="M12 15c4.4 0 7.3-2.2 7.3-6.1C14.8 8.9 12 11 12 15z"></path>
-                                    <path d="M7 21h10"></path>
-                                </svg>
-                            </div>
-                            <h3>Jardinería</h3>
-                            <p>Mantenimiento de jardines, poda, limpieza y cuidado de espacios verdes.</p>
-                            <span class="service-arrow" aria-hidden="true">
-                                <svg viewBox="0 0 24 24"
-                                     fill="none"
-                                     stroke="currentColor"
-                                     stroke-width="2"
-                                     stroke-linecap="round"
-                                     stroke-linejoin="round">
-                                    <path d="M5 12h14M13 6l6 6-6 6"></path>
-                                </svg>
-                            </span>
-                        </a>
-                    </div>
-                </div>
-            </section>
-            <section class="workflow" id="como-funciona">
-                <div class="container">
-                    <div class="section-head">
-                        <div>
-                            <p class="section-kicker">Cómo funciona</p>
-                            <h2>Del problema a la solución.</h2>
+                        <h3>Plomería</h3>
+                        <p>Reparaciones, fugas, grifería y mantenimiento de instalaciones de agua.</p>
+                        <span class="service-arrow" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <path d="M5 12h14M13 6l6 6-6 6"></path>
+                            </svg>
+                        </span>
+                    </a>
+                    <a class="service-card" href="/servicios/electricidad/">
+                        <span class="service-number">02</span>
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="1.8"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <path d="M13 2 4 14h7l-1 8 10-13h-7l0-7z"></path>
+                            </svg>
                         </div>
-                        <p class="section-subtitle">
-                            Un flujo simple para que el cliente encuentre el servicio correcto y pueda solicitar ayuda sin perderse en el proceso.
-                        </p>
-                    </div>
-                    <div class="steps">
-                        <article class="step">
-                            <div class="step-number">01</div>
-                            <h3>Elige un servicio</h3>
-                            <p>Selecciona Plomería, Electricidad, Pintura o Jardinería según lo que necesita tu casa.</p>
-                        </article>
-                        <article class="step">
-                            <div class="step-number">02</div>
-                            <h3>Cuéntanos qué necesitas</h3>
-                            <p>Indica el trabajo, la ubicación y los detalles principales para orientar la solicitud.</p>
-                        </article>
-                        <article class="step">
-                            <div class="step-number">03</div>
-                            <h3>Recibe atención</h3>
-                            <p>Un profesional podrá revisar el pedido y coordinar contigo los siguientes pasos.</p>
-                        </article>
-                    </div>
-                </div>
-            </section>
-            <section class="cta-section" id="contacto">
-                <div class="container">
-                    <div class="cta">
-                        <div>
-                            <p class="section-kicker">Tu próximo proyecto</p>
-                            <h2>Cuida tu casa. Nosotros te ayudamos con el resto.</h2>
-                            <p>Solicita un servicio y da el primer paso para resolver ese pendiente que tienes en casa.</p>
+                        <h3>Electricidad</h3>
+                        <p>Instalaciones, luminarias, tomacorrientes y mantenimiento eléctrico del hogar.</p>
+                        <span class="service-arrow" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <path d="M5 12h14M13 6l6 6-6 6"></path>
+                            </svg>
+                        </span>
+                    </a>
+                    <a class="service-card" href="/servicios/pintura/">
+                        <span class="service-number">03</span>
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="1.8"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <path d="M4 6h11a3 3 0 0 1 3 3v1H4V6z"></path>
+                                <path d="M8 10v8"></path>
+                                <path d="M8 18c0 2-1 3-3 4"></path>
+                                <path d="M16 10v4"></path>
+                            </svg>
                         </div>
-                        <div class="cta-action">
-                            <a class="btn btn-primary"
-                               href="/solicitar-servicio/">Solicitar servicio</a>
+                        <h3>Pintura</h3>
+                        <p>Pintura interior y exterior, retoques y renovación de ambientes.</p>
+                        <span class="service-arrow" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <path d="M5 12h14M13 6l6 6-6 6"></path>
+                            </svg>
+                        </span>
+                    </a>
+                    <a class="service-card" href="/servicios/jardineria/">
+                        <span class="service-number">04</span>
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="1.8"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <path d="M12 21V10"></path>
+                                <path d="M12 12c-4.5 0-7-2.4-7-6 4.7 0 7 2.1 7 6z"></path>
+                                <path d="M12 15c4.4 0 7.3-2.2 7.3-6.1C14.8 8.9 12 11 12 15z"></path>
+                                <path d="M7 21h10"></path>
+                            </svg>
                         </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-        <footer>
-            <div class="container footer-inner">
-                <div>© 2026 CasaListo. Servicios para el cuidado del hogar.</div>
-                <div class="footer-links">
-                    <a href="#servicios">Servicios</a>
-                    <a href="#como-funciona">Cómo funciona</a>
-                    <a href="{% url 'servicio:home' %}">Acceso</a>
+                        <h3>Jardinería</h3>
+                        <p>Mantenimiento de jardines, poda, limpieza y cuidado de espacios verdes.</p>
+                        <span class="service-arrow" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <path d="M5 12h14M13 6l6 6-6 6"></path>
+                            </svg>
+                        </span>
+                    </a>
                 </div>
             </div>
-        </footer>
-    </body>
-</html>
+        </section>
+        <section class="workflow" id="como-funciona">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <p class="section-kicker">Cómo funciona</p>
+                        <h2>Del problema a la solución.</h2>
+                    </div>
+                    <p class="section-subtitle">
+                        Un flujo simple para que el cliente encuentre el servicio correcto y pueda solicitar ayuda sin perderse en el proceso.
+                    </p>
+                </div>
+                <div class="steps">
+                    <article class="step">
+                        <div class="step-number">01</div>
+                        <h3>Elige un servicio</h3>
+                        <p>Selecciona Plomería, Electricidad, Pintura o Jardinería según lo que necesita tu casa.</p>
+                    </article>
+                    <article class="step">
+                        <div class="step-number">02</div>
+                        <h3>Cuéntanos qué necesitas</h3>
+                        <p>Indica el trabajo, la ubicación y los detalles principales para orientar la solicitud.</p>
+                    </article>
+                    <article class="step">
+                        <div class="step-number">03</div>
+                        <h3>Recibe atención</h3>
+                        <p>Un profesional podrá revisar el pedido y coordinar contigo los siguientes pasos.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section class="cta-section" id="contacto">
+            <div class="container">
+                <div class="cta">
+                    <div>
+                        <p class="section-kicker">Tu próximo proyecto</p>
+                        <h2>Cuida tu casa. Nosotros te ayudamos con el resto.</h2>
+                        <p>Solicita un servicio y da el primer paso para resolver ese pendiente que tienes en casa.</p>
+                    </div>
+                    <div class="cta-action">
+                        <a class="btn btn-primary"
+                           href="/solicitar-servicio/">Solicitar servicio</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container footer-inner">
+            <div>© 2026 CasaListo. Servicios para el cuidado del hogar.</div>
+            <div class="footer-links">
+                <a href="#servicios">Servicios</a>
+                <a href="#como-funciona">Cómo funciona</a>
+                <a href="{% url 'servicio:home' %}">Acceso</a>
+            </div>
+        </div>
+    </footer>
+{% endblock content %}

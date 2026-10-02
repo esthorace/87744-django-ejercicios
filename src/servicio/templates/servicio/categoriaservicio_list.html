@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-    </head>
-    <body>
-        <h1>Categoría de Servicios - Lista</h1>
-        {% for categoria in categorias %}
-            <p>{{ categoria.nombre }}</p>
-        {% endfor %}
-        <p><a href="{% url 'servicio:home' %}">Volver</a></p>
-    </body>
-</html>
+{% extends "core/base.html" %}
+
+{% block content %}
+    <h1>Categoría de Servicios - Lista</h1>
+    {% for categoria in categorias %}
+        <p>{{ categoria.nombre }}</p>
+    {% endfor %}
+    <p><a href="{% url 'servicio:home' %}">Volver</a></p>
+{% endblock content %}
