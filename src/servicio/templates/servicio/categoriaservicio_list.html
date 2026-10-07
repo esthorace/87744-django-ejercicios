@@ -2,8 +2,11 @@
 
 {% block content %}
     <h1>Categoría de Servicios - Lista</h1>
-    {% for categoria in categorias %}
-        <p>{{ categoria.nombre }}</p>
-    {% endfor %}
+    <p><a href="{% url 'servicio:categoriaservicio_create' %}">Crear</a></p>
+    <ul>
+        {% for categoria in categorias %}
+            <li>{{ categoria.nombre }}</li>
+        {% endfor %}
+    </ul>
     <p><a href="{% url 'servicio:home' %}">Volver</a></p>
 {% endblock content %}
