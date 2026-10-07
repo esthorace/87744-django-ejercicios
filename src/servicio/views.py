@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import CategoriaServicioForm
 from .models import CategoriaServicio
@@ -11,6 +11,11 @@ def home(request):
 def categoriaservicio_list(request):
     categorias = CategoriaServicio.objects.all()
     return render(request, "servicio/categoriaservicio_list.html", {"categorias": categorias})
+
+
+def categoriaservicio_detail(request, pk):
+    categoria = get_object_or_404(CategoriaServicio, pk=pk)
+    return render(request, "servicio/categoriaservicio_detail.html", {"categoria": categoria})
 
 
 def categoriaservicio_create(request):
