@@ -1,0 +1,34 @@
+/* ==========================================================================
+   Detail: ficha de detalle del CRUD
+   Se carga en servicio/categoriaservicio_detail.html vía el bloque `style`.
+   ========================================================================== */
+
+.detalle-categoria {
+    max-width: 680px;
+    padding: 28px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+}
+
+.detalle-categoria dl {
+    margin: 0;
+}
+
+.detalle-categoria dt {
+    margin-top: 18px;
+    font-size: .8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--muted);
+}
+
+.detalle-categoria dt:first-child {
+    margin-top: 0;
+}
+
+.detalle-categoria dd {
+    margin: 4px 0 0;
+    font-size: 1.05rem;
+}

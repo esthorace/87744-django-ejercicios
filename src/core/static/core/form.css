@@ -1,0 +1,110 @@
+/* ==========================================================================
+   Form: formularios CRUD (crear / editar / eliminar)
+   Se carga en categoriaservicio_form/_update/_delete vía el bloque `style`.
+   Trabaja sobre la salida de `{{ form.as_p }}` y los botones de submit.
+   ========================================================================== */
+
+.form-categoria {
+    max-width: 680px;
+    padding: 28px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+}
+
+.form-categoria p {
+    margin: 0 0 18px;
+}
+
+.form-categoria p:last-of-type {
+    margin-bottom: 24px;
+}
+
+.form-categoria label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: .8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--muted);
+}
+
+.form-categoria input,
+.form-categoria textarea,
+.form-categoria select {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    color: var(--text);
+    font: inherit;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.form-categoria input:focus,
+.form-categoria textarea:focus,
+.form-categoria select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(33, 92, 74, .15);
+}
+
+.form-categoria textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.form-categoria .btn {
+    cursor: pointer;
+}
+
+.form-categoria button[type="submit"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 46px;
+    padding: 0 18px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background: var(--primary);
+    color: white;
+    font-family: inherit;
+    font-size: .92rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 12px 28px rgba(33, 92, 74, .18);
+    transition: transform .2s ease, background .2s ease;
+}
+
+.form-categoria button[type="submit"]:hover {
+    transform: translateY(-2px);
+    background: var(--primary-dark);
+}
+
+.errorlist {
+    margin: 0 0 12px;
+    padding: 10px 14px;
+    border: 1px solid #b3452f;
+    border-radius: var(--radius-sm);
+    background: #fbeeea;
+    color: #b3452f;
+    font-size: .88rem;
+}
+
+.confirmar-eliminar {
+    max-width: 680px;
+    padding: 28px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+}
+
+@media (max-width: 640px) {
+    .form-categoria,
+    .confirmar-eliminar {
+        padding: 22px 18px;
+    }
+}

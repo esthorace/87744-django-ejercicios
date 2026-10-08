@@ -1,8 +1,18 @@
 {% extends "core/base.html" %}
 
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'core/form.css' %}" />
+{% endblock style %}
+
 {% block content %}
-    <h1>Categoría de Servicios - Crear</h1>
-    <form method="post">
+    {% if form.instance.pk %}
+        <h1>Categoría de Servicios - Editar</h1>
+    {% else %}
+        <h1>Categoría de Servicios - Crear</h1>
+    {% endif %}
+    <form class="form-categoria" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Guardar</button>

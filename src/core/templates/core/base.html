@@ -8,8 +8,13 @@
         <meta name="description"
               content="Servicios profesionales para el cuidado, mantenimiento y mejora del hogar." />
         <title>CasaListo — Servicios para tu hogar</title>
-        <link rel="stylesheet" href="{% static 'core/style.css' %}" />
+        <!-- CSS base y compartido: orden de cascada (variables → componentes → layout) -->
+        <link rel="stylesheet" href="{% static 'core/base.css' %}" />
+        <link rel="stylesheet" href="{% static 'core/components.css' %}" />
+        <link rel="stylesheet" href="{% static 'core/header.css' %}" />
+        <link rel="stylesheet" href="{% static 'core/footer.css' %}" />
 
+        <!-- CSS específico de cada página -->
         {% block style %}
         {% endblock style %}
     </head>

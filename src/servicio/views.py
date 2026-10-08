@@ -28,3 +28,27 @@ def categoriaservicio_create(request):
         form = CategoriaServicioForm()
 
     return render(request, "servicio/categoriaservicio_form.html", {"form": form})
+
+
+def categoriaservicio_update(request, pk):
+    categoria = get_object_or_404(CategoriaServicio, pk=pk)
+
+    if request.method == "POST":
+        form = CategoriaServicioForm(request.POST, instance=categoria)
+        if form.is_valid():
+            form.save()
+            return redirect("servicio:categoriaservicio_list")
+    else:
+        form = CategoriaServicioForm(instance=categoria)
+
+    return render(request, "servicio/categoriaservicio_form.html", {"form": form})
+
+
+def categoriaservicio_delete(request, pk):
+    categoria = get_object_or_404(CategoriaServicio, pk=pk)
+
+    if request.method == "POST":
+        categoria.delete()
+        return redirect("servicio:categoriaservicio_list")
+
+    return render(request, "servicio/categoriaservicio_delete.html", {"categoria": categoria})

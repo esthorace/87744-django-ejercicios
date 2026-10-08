@@ -1,76 +1,9 @@
 {% extends "core/base.html" %}
 
+{% load static %}
+
 {% block style %}
-    <style>
-        .tabla-categorias {
-            width: 100%;
-            border-collapse: collapse;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            overflow: hidden;
-        }
-
-        .tabla-categorias th,
-        .tabla-categorias td {
-            padding: 14px 18px;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .tabla-categorias th {
-            background: var(--surface-soft);
-            font-size: .82rem;
-            text-transform: uppercase;
-            letter-spacing: .06em;
-            color: var(--muted);
-        }
-
-        .tabla-categorias tr:last-child td {
-            border-bottom: 0;
-        }
-
-        .acciones {
-            display: flex;
-            gap: 10px;
-        }
-
-        td.acciones {
-            display: flex;
-            align-items: center;
-        }
-
-        .accion-icono {
-            width: 34px;
-            height: 34px;
-            display: grid;
-            place-items: center;
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            background: white;
-            color: var(--primary);
-            transition: background .2s ease, color .2s ease;
-        }
-
-        .accion-icono:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        .accion-icono svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        .accion-icono--eliminar {
-            color: #b3452f;
-        }
-
-        .accion-icono--eliminar:hover {
-            background: #b3452f;
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'core/table.css' %}" />
 {% endblock style %}
 
 {% block content %}
@@ -102,7 +35,10 @@
                                 <circle cx="12" cy="12" r="3"></circle>
                             </svg>
                         </a>
-                        <a class="accion-icono" href="#" title="Editar" aria-label="Editar">
+                        <a class="accion-icono"
+                           href="{% url 'servicio:categoriaservicio_update' categoria.pk %}"
+                           title="Editar"
+                           aria-label="Editar">
                             <svg viewBox="0 0 24 24"
                                  fill="none"
                                  stroke="currentColor"
@@ -114,7 +50,7 @@
                             </svg>
                         </a>
                         <a class="accion-icono accion-icono--eliminar"
-                           href="#"
+                           href="{% url 'servicio:categoriaservicio_delete' categoria.pk %}"
                            title="Eliminar"
                            aria-label="Eliminar">
                             <svg viewBox="0 0 24 24"

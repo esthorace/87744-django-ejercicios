@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'core/form.css' %}" />
+{% endblock style %}
+
+{% block content %}
+    <h1>Categoría de Servicios - Eliminar</h1>
+    <div class="confirmar-eliminar">
+        <p>¿Seguro que deseas eliminar la categoría <strong>{{ categoria.nombre }}</strong>?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Eliminar</button>
+        </form>
+    </div>
+    <p><a href="{% url 'servicio:categoriaservicio_list' %}">Cancelar</a></p>
+{% endblock content %}
