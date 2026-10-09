@@ -1,18 +1,12 @@
 from django.urls import path
+from django.views.generic import TemplateView
 
-from .views import (
-    categoriaservicio_create,
-    categoriaservicio_delete,
-    categoriaservicio_detail,
-    categoriaservicio_list,
-    categoriaservicio_update,
-    home,
-)
+from .views import *
 
 app_name = "servicio"
 
 urlpatterns = [
-    path("", home, name="home"),
+    path("", TemplateView.as_view(template_name="servicio/home.html"), name="home"),
     path("categoria/list/", categoriaservicio_list, name="categoriaservicio_list"),
     path("categoria/create/", categoriaservicio_create, name="categoriaservicio_create"),
     path("categoria/<int:pk>/", categoriaservicio_detail, name="categoriaservicio_detail"),
