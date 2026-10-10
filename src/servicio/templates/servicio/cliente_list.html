@@ -15,6 +15,7 @@
                 <th>Apellido</th>
                 <th>Email</th>
                 <th>Teléfono</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -24,10 +25,13 @@
                     <td>{{ cliente.apellido }}</td>
                     <td>{{ cliente.email|default:"—" }}</td>
                     <td>{{ cliente.telefono }}</td>
+                    <td class="acciones">
+                        {% include "servicio/_acciones_iconos.html" with objeto=cliente detail_url_name="servicio:cliente_detail" update_url_name="servicio:cliente_update" delete_url_name="servicio:cliente_delete" %}
+                    </td>
                 </tr>
             {% empty %}
                 <tr>
-                    <td colspan="4">No hay clientes registrados.</td>
+                    <td colspan="5">No hay clientes registrados.</td>
                 </tr>
             {% endfor %}
         </tbody>

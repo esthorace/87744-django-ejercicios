@@ -1,0 +1,21 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'core/form.css' %}" />
+{% endblock style %}
+
+{% block content %}
+    {% if form.instance.pk %}
+        <h1>Cliente - Editar</h1>
+    {% else %}
+        <h1>Cliente - Crear</h1>
+    {% endif %}
+    <form class="form-categoria" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+    <p><a href="{% url 'servicio:cliente_list' %}">Volver</a></p>
+{% endblock content %}

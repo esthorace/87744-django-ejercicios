@@ -13,4 +13,7 @@ urlpatterns = [
     path("categoria/<int:pk>/update/", categoriaservicio_update, name="categoriaservicio_update"),
     path("categoria/<int:pk>/delete/", categoriaservicio_delete, name="categoriaservicio_delete"),
     path("cliente/list/", ClienteList.as_view(), name="cliente_list"),
+    path("cliente/<int:pk>/", ClienteDetail.as_view(), name="cliente_detail"),
+    path("cliente/<int:pk>/update/", ClienteUpdate.as_view(), name="cliente_update"),
+    path("cliente/<int:pk>/delete/", ClienteDelete.as_view(), name="cliente_delete"),
 ]

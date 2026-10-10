@@ -1,0 +1,31 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'core/detail.css' %}" />
+{% endblock style %}
+
+{% block content %}
+    <h1>Cliente - Detalle</h1>
+    <div class="detalle-categoria">
+        <dl>
+            <dt>Nombre</dt>
+            <dd>
+                {{ cliente.nombre }}
+            </dd>
+            <dt>Apellido</dt>
+            <dd>
+                {{ cliente.apellido }}
+            </dd>
+            <dt>Email</dt>
+            <dd>
+                {{ cliente.email|default:"—" }}
+            </dd>
+            <dt>Teléfono</dt>
+            <dd>
+                {{ cliente.telefono }}
+            </dd>
+        </dl>
+    </div>
+    <p><a href="{% url 'servicio:cliente_list' %}">Volver</a></p>
+{% endblock content %}
