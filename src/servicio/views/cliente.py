@@ -1,3 +1,4 @@
+from django.db.models import Q, QuerySet
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
@@ -9,6 +10,18 @@ class ClienteList(ListView):
     model = Cliente
     template_name = "servicio/cliente_list.html"
     context_object_name = "clientes"
+    paginate_by = 10
+    ordering = ("apellido", "nombre", "-pk")
+
+    def get_queryset(self) -> QuerySet:
+        clientes = super().get_queryset()
+        busqueda = self.request.GET.get("busqueda", "").strip()
+
+        if busqueda:
+            clientes = clientes.filter(
+                Q(nombre__icontains=busqueda) | Q(apellido__icontains=busqueda),
+            )
+        return clientes
 
 
 class ClienteCreate(CreateView):

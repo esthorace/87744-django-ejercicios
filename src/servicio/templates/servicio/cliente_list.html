@@ -8,6 +8,15 @@
 
 {% block content %}
     <h1>Clientes - Lista</h1>
+    <form method="get">
+        <label for="id-busqueda">Buscar clientes</label>
+        <input id="id-busqueda"
+               type="text"
+               name="busqueda"
+               placeholder="Escribe aquí para buscar"
+               value="{{ request.GET.busqueda }}" />
+        <button type="submit">Buscar</button>
+    </form>
     <p><a href="{% url 'servicio:cliente_create' %}">Crear</a></p>
     <table class="tabla-categorias">
         <thead>
