@@ -1,11 +1,23 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
 from ..forms import CategoriaServicioForm
 from ..models import CategoriaServicio
 
 
-def categoriaservicio_list(request):
+def categoriaservicio_list(request: HttpRequest) -> HttpResponse:
+    busqueda = request.GET.get("busqueda", "").strip()
+
     categorias = CategoriaServicio.objects.all()
+
+    if busqueda:
+        categorias = categorias.filter(nombre__contains=busqueda)
+        """
+        SELECT *
+        FROM servicio_categoriaservicio
+        WHERE nombre ILIKE '%busqueda%'
+        """
+
     return render(request, "servicio/categoriaservicio_list.html", {"categorias": categorias})
 
 

@@ -8,6 +8,9 @@
 
 {% block content %}
     <h1>Categoría de Servicios - Lista</h1>
+    <form method="get">
+        <input type="text" name="busqueda" placeholder="Escribe aquí para buscar" />
+    </form>
     <p><a href="{% url 'servicio:categoriaservicio_create' %}">Crear</a></p>
     <table class="tabla-categorias">
         <thead>
