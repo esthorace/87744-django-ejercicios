@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="{% static 'core/components.css' %}" />
         <link rel="stylesheet" href="{% static 'core/header.css' %}" />
         <link rel="stylesheet" href="{% static 'core/footer.css' %}" />
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <!-- CSS específico de cada página -->
         {% block style %}
@@ -29,5 +30,6 @@
         <footer>
             {% include "core/partials/footer.html" %}
         </footer>
+        {% include "servicio/_messages.html" %}
     </body>
 </html>
