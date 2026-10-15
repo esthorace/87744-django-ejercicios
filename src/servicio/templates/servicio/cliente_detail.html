@@ -6,26 +6,36 @@
 {% endblock style %}
 
 {% block content %}
-    <h1>Cliente - Detalle</h1>
-    <div class="detalle-categoria">
-        <dl>
-            <dt>Nombre</dt>
-            <dd>
-                {{ cliente.nombre }}
-            </dd>
-            <dt>Apellido</dt>
-            <dd>
-                {{ cliente.apellido }}
-            </dd>
-            <dt>Email</dt>
-            <dd>
-                {{ cliente.email|default:"—" }}
-            </dd>
-            <dt>Teléfono</dt>
-            <dd>
-                {{ cliente.telefono }}
-            </dd>
-        </dl>
+    <div class="container page">
+        <div class="page-header">
+            <div>
+                <p class="page-eyebrow">Clientes · Detalle</p>
+                <h1>{{ cliente.nombre }} {{ cliente.apellido }}</h1>
+            </div>
+            <div class="page-actions">
+                <a class="btn btn-light" href="{% url 'servicio:cliente_update' cliente.pk %}">Editar</a>
+                <a class="btn btn-ghost" href="{% url 'servicio:cliente_list' %}">← Volver</a>
+            </div>
+        </div>
+        <div class="detalle-categoria">
+            <dl>
+                <div>
+                    <dt>Nombre</dt>
+                    <dd>{{ cliente.nombre }}</dd>
+                </div>
+                <div>
+                    <dt>Apellido</dt>
+                    <dd>{{ cliente.apellido }}</dd>
+                </div>
+                <div>
+                    <dt>Email</dt>
+                    <dd>{{ cliente.email|default:"—" }}</dd>
+                </div>
+                <div>
+                    <dt>Teléfono</dt>
+                    <dd>{{ cliente.telefono }}</dd>
+                </div>
+            </dl>
+        </div>
     </div>
-    <p><a href="{% url 'servicio:cliente_list' %}">Volver</a></p>
 {% endblock content %}

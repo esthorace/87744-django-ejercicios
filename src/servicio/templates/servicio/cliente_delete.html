@@ -6,13 +6,24 @@
 {% endblock style %}
 
 {% block content %}
-    <h1>Cliente - Eliminar</h1>
-    <div class="confirmar-eliminar">
-        <p>¿Seguro que deseas eliminar al cliente <strong>{{ cliente }}</strong>?</p>
-        <form method="post">
-            {% csrf_token %}
-            <button type="submit">Eliminar</button>
-        </form>
+    <div class="container page">
+        <div class="page-header">
+            <div>
+                <p class="page-eyebrow">Clientes · Eliminar</p>
+                <h1>Eliminar cliente</h1>
+                <p class="page-subtitle">Esta acción no se puede deshacer.</p>
+            </div>
+        </div>
+        <div class="confirmar-eliminar">
+            <div class="danger-zone">⚠ Zona de peligro</div>
+            <p>¿Seguro que deseas eliminar al cliente <strong>{{ cliente }}</strong>?</p>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-actions">
+                    <button class="btn btn-danger" type="submit">Sí, eliminar</button>
+                    <a class="btn btn-ghost" href="{% url 'servicio:cliente_list' %}">Cancelar</a>
+                </div>
+            </form>
+        </div>
     </div>
-    <p><a href="{% url 'servicio:cliente_list' %}">Cancelar</a></p>
 {% endblock content %}

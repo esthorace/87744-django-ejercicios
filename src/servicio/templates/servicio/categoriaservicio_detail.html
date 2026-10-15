@@ -6,18 +6,28 @@
 {% endblock style %}
 
 {% block content %}
-    <h1>Categoría de Servicios - Detalle</h1>
-    <div class="detalle-categoria">
-        <dl>
-            <dt>Nombre</dt>
-            <dd>
-                {{ categoria.nombre }}
-            </dd>
-            <dt>Descripción</dt>
-            <dd>
-                {{ categoria.descripcion|default:"—" }}
-            </dd>
-        </dl>
+    <div class="container page">
+        <div class="page-header">
+            <div>
+                <p class="page-eyebrow">Categorías · Detalle</p>
+                <h1>{{ categoria.nombre }}</h1>
+            </div>
+            <div class="page-actions">
+                <a class="btn btn-light" href="{% url 'servicio:categoriaservicio_update' categoria.pk %}">Editar</a>
+                <a class="btn btn-ghost" href="{% url 'servicio:categoriaservicio_list' %}">← Volver</a>
+            </div>
+        </div>
+        <div class="detalle-categoria">
+            <dl>
+                <div>
+                    <dt>Nombre</dt>
+                    <dd>{{ categoria.nombre }}</dd>
+                </div>
+                <div class="full">
+                    <dt>Descripción</dt>
+                    <dd>{{ categoria.descripcion|default:"—" }}</dd>
+                </div>
+            </dl>
+        </div>
     </div>
-    <p><a href="{% url 'servicio:categoriaservicio_list' %}">Volver</a></p>
 {% endblock content %}

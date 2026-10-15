@@ -10,6 +10,7 @@
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
 }
 
 .form-categoria p {
@@ -87,11 +88,19 @@
 .errorlist {
     margin: 0 0 12px;
     padding: 10px 14px;
-    border: 1px solid #b3452f;
+    list-style: none;
+    border: 1px solid var(--danger);
     border-radius: var(--radius-sm);
-    background: #fbeeea;
-    color: #b3452f;
+    background: var(--danger-soft);
+    color: var(--danger);
     font-size: .88rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 4px;
 }
 
 .confirmar-eliminar {
@@ -100,6 +109,24 @@
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.confirmar-eliminar p {
+    margin-top: 0;
+}
+
+.confirmar-eliminar .danger-zone {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+    border-radius: var(--radius-sm);
+    background: var(--danger-soft);
+    color: var(--danger-dark);
+    font-size: .92rem;
+    font-weight: 700;
 }
 
 @media (max-width: 640px) {

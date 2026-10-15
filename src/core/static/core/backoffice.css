@@ -1,0 +1,66 @@
+/* ==========================================================================
+   Backoffice: dashboard de servicio/home.html
+   Se carga solo en servicio/home.html vía el bloque `style`.
+   ========================================================================== */
+
+.backoffice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.backoffice-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 26px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.backoffice-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+}
+
+.backoffice-icon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    background: var(--accent);
+    color: var(--primary);
+}
+
+.backoffice-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.backoffice-card h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+}
+
+.backoffice-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: .93rem;
+}
+
+.backoffice-card .btn {
+    align-self: flex-start;
+    margin-top: 8px;
+}
+
+@media (max-width: 640px) {
+    .backoffice-grid {
+        grid-template-columns: 1fr;
+    }
+}

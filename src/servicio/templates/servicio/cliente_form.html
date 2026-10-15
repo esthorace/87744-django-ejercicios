@@ -7,15 +7,27 @@
 {% endblock style %}
 
 {% block content %}
-    {% if form.instance.pk %}
-        <h1>Cliente - Editar</h1>
-    {% else %}
-        <h1>Cliente - Crear</h1>
-    {% endif %}
-    <form class="form-categoria" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar</button>
-    </form>
-    <p><a href="{% url 'servicio:cliente_list' %}">Volver</a></p>
+    <div class="container page">
+        <div class="page-header">
+            <div>
+                <p class="page-eyebrow">Clientes · {% if form.instance.pk %}Editar{% else %}Crear{% endif %}</p>
+                <h1>
+                    {% if form.instance.pk %}
+                        Editar cliente
+                    {% else %}
+                        Nuevo cliente
+                    {% endif %}
+                </h1>
+                <p class="page-subtitle">Completá los datos y guardá los cambios.</p>
+            </div>
+        </div>
+        <form class="form-categoria" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Guardar</button>
+                <a class="btn btn-ghost" href="{% url 'servicio:cliente_list' %}">Cancelar</a>
+            </div>
+        </form>
+    </div>
 {% endblock content %}

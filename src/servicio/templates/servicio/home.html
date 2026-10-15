@@ -1,20 +1,46 @@
 {% extends "core/base.html" %}
 
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'core/backoffice.css' %}" />
+{% endblock style %}
+
 {% block content %}
-    <main>
-        <h1>Backoffice</h1>
-        <section>
-            <h2>Categorías de Servicios</h2>
-            <p>
-                <a href="{% url 'servicio:categoriaservicio_list' %}">Lista de Servicios</a>
-            </p>
-        </section>
-        <section>
-            <h2>Clientes</h2>
-            <p>
-                <a href="{% url 'servicio:cliente_list' %}">Lista de Clientes</a>
-            </p>
-        </section>
-        <p><a href="{% url 'core:home' %}">LandingPage</a></p>
-    </main>
+    <div class="container page">
+        <div class="page-header">
+            <div>
+                <p class="page-eyebrow">CasaListo · Administración</p>
+                <h1>Panel de gestión</h1>
+                <p class="page-subtitle">Accedé rápido a las secciones principales del backoffice.</p>
+            </div>
+            <div class="page-actions">
+                <a class="btn btn-ghost" href="{% url 'core:home' %}">Ver landing →</a>
+            </div>
+        </div>
+
+        <div class="backoffice-grid">
+            <article class="backoffice-card">
+                <div class="backoffice-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 7h16M4 12h16M4 17h10" />
+                    </svg>
+                </div>
+                <h2>Categorías de servicios</h2>
+                <p>Creá, editá y organizá las categorías disponibles para los clientes.</p>
+                <a class="btn btn-primary" href="{% url 'servicio:categoriaservicio_list' %}">Gestionar categorías</a>
+            </article>
+            <article class="backoffice-card">
+                <div class="backoffice-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="8" r="4" />
+                        <path d="M4 21c0-4 3.5-6.5 8-6.5s8 2.5 8 6.5" />
+                    </svg>
+                </div>
+                <h2>Clientes</h2>
+                <p>Administrá la cartera de clientes, sus datos y su información de contacto.</p>
+                <a class="btn btn-primary" href="{% url 'servicio:cliente_list' %}">Gestionar clientes</a>
+            </article>
+        </div>
+    </div>
 {% endblock content %}
