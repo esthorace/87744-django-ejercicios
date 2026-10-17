@@ -1,10 +1,20 @@
 from django.core.validators import MinValueValidator
 from django.db import models
 
+from core.validators import ValidarTelefono, ValidarTextoEspañol
+
 
 class CategoriaServicio(models.Model):
-    nombre = models.CharField(unique=True)
-    descripcion = models.TextField(blank=True)
+    nombre = models.CharField(
+        unique=True,
+        validators=[ValidarTextoEspañol()],
+    )
+    descripcion = models.TextField(
+        blank=True,
+        validators=[
+            ValidarTextoEspañol(min_longitud=10, permitir_puntuacion=True),
+        ],
+    )
 
     def __str__(self) -> str:
         return self.nombre
@@ -15,10 +25,10 @@ class CategoriaServicio(models.Model):
 
 
 class Cliente(models.Model):
-    nombre = models.CharField()
-    apellido = models.CharField()
+    nombre = models.CharField(validators=[ValidarTextoEspañol()])
+    apellido = models.CharField(validators=[ValidarTextoEspañol()])
     email = models.EmailField(unique=True, blank=True, null=True)
-    telefono = models.CharField(unique=True)
+    telefono = models.CharField(unique=True, validators=[ValidarTelefono()])
 
     def __str__(self) -> str:
         return f"{self.nombre} {self.apellido}"
@@ -26,6 +36,11 @@ class Cliente(models.Model):
     class Meta:
         verbose_name = "Cliente"
         verbose_name_plural = "Clientes"
+
+    def clean(self):
+        super().clean()
+        if self.nombre:
+            self.nombre = self.nombre.strip()
 
 
 class Servicio(models.Model):
@@ -51,7 +66,10 @@ class Servicio(models.Model):
         on_delete=models.PROTECT,
         related_name="servicios",
     )
-    descripcion = models.TextField(help_text="Descripción detallada del trabajo a realizar")
+    descripcion = models.TextField(
+        help_text="Descripción detallada del trabajo a realizar",
+        validators=[ValidarTextoEspañol(min_longitud=10, permitir_puntuacion=True)],
+    )
     presupuesto = models.DecimalField(
         max_digits=12,
         decimal_places=2,
