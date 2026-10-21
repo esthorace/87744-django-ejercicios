@@ -21,8 +21,7 @@
             <a href="#contacto">Contacto</a>
         </nav>
         <div class="nav-actions">
-            <!-- En Django, este enlace puede llevar a /login/ -->
-            <a class="nav-login" href="{% url 'servicio:home' %}">Acceder</a>
+            <a class="nav-login" href="{% url 'core:login' %}">Acceder</a>
             <a class="btn btn-primary" href="#contacto">Solicitar servicio</a>
             <details class="mobile-nav">
                 <summary aria-label="Abrir menú">
@@ -40,7 +39,7 @@
                     <a href="#servicios">Servicios</a>
                     <a href="#como-funciona">Cómo funciona</a>
                     <a href="#contacto">Contacto</a>
-                    <a href="/login/">Acceder</a>
+                    <a href="{% url 'core:login' %}">Acceder</a>
                 </div>
             </details>
         </div>

@@ -1,5 +1,6 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.contrib.auth import authenticate, login
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import redirect, render
 
 # Create your views here.
 
@@ -12,6 +13,23 @@ def te_saludo(request):
 def home(request):
     lista_notas = [1, 10, 4, 7, 8, 5, 7]
     return render(request, "core/home.html", {"notas": lista_notas})
+
+
+def login_view(request: HttpRequest) -> HttpResponse:
+    error = None
+
+    if request.method == "POST":
+        username = request.POST.get("username", "")
+        password = request.POST.get("password", "")
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect("core:home")
+
+        error = "Usuario o contraseña incorrectos."
+
+    return render(request, "core/login.html", {"error": error})
 
 
 def ejercicio_4(request):

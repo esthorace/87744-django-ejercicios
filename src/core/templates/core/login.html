@@ -1,0 +1,43 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'core/login.css' %}" />
+{% endblock style %}
+
+{% block content %}
+    <section class="login-page">
+        <div class="login-card">
+            <p class="login-eyebrow">CasaListo</p>
+            <h1>Qué bueno verte de nuevo</h1>
+            <p class="login-intro">Inicia sesión para continuar con tus servicios.</p>
+
+            <form class="login-form" method="post">
+                {% csrf_token %}
+                <div class="login-field">
+                    <label for="username">Usuario</label>
+                    <input type="text"
+                           name="username"
+                           id="username"
+                           autocomplete="username"
+                           required
+                           autofocus />
+                </div>
+                <div class="login-field">
+                    <label for="password">Contraseña</label>
+                    <input type="password"
+                           name="password"
+                           id="password"
+                           autocomplete="current-password"
+                           required />
+                </div>
+
+                {% if error %}
+                    <p class="login-error" role="alert">{{ error }}</p>
+                {% endif %}
+
+                <button class="btn btn-primary login-submit" type="submit">Iniciar sesión</button>
+            </form>
+        </div>
+    </section>
+{% endblock content %}
