@@ -20,6 +20,7 @@
                 <a href="#servicios">Servicios</a>
                 <a href="#como-funciona">Cómo funciona</a>
                 <a href="#contacto">Contacto</a>
+                <a class="btn btn-primary" href="#contacto">Solicitar servicio</a>
             {% endif %}
         </nav>
         <div class="nav-actions">
@@ -28,7 +29,6 @@
             {% else %}
                 <a class="nav-login" href="{% url 'core:login' %}">Acceder</a>
             {% endif %}
-            <a class="btn btn-primary" href="#contacto">Solicitar servicio</a>
             <details class="mobile-nav">
                 <summary aria-label="Abrir menú">
                     <svg width="20"
