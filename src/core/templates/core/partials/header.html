@@ -26,6 +26,12 @@
         <div class="nav-actions">
             {% if user.is_authenticated %}
                 <span class="nav-user">{{ user.username }}</span>
+                <form class="nav-logout-form"
+                      action="{% url 'core:logout' %}"
+                      method="post">
+                    {% csrf_token %}
+                    <button class="nav-logout" type="submit">Salir</button>
+                </form>
             {% else %}
                 <a class="nav-login" href="{% url 'core:login' %}">Acceder</a>
             {% endif %}
@@ -49,6 +55,12 @@
                     {% endif %}
                     {% if user.is_authenticated %}
                         <span class="nav-user">{{ user.username }}</span>
+                        <form class="nav-logout-form"
+                              action="{% url 'core:logout' %}"
+                              method="post">
+                            {% csrf_token %}
+                            <button class="nav-logout" type="submit">Salir</button>
+                        </form>
                     {% else %}
                         <a href="{% url 'core:login' %}">Acceder</a>
                     {% endif %}

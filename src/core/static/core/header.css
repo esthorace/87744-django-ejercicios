@@ -97,6 +97,37 @@
     content: "";
 }
 
+/* Cierre de sesión: acción secundaria junto al usuario */
+.nav-logout-form {
+    display: flex;
+}
+
+.nav-logout {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 14px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: #4f5a53;
+    font: inherit;
+    font-size: .88rem;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.nav-logout:hover {
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+.nav-logout:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(33, 92, 74, .14);
+}
+
 .mobile-nav {
     display: none;
 }
@@ -107,7 +138,8 @@
     }
 
     /* El usuario se muestra dentro del menú móvil para no duplicarlo */
-    .nav-actions > .nav-user {
+    .nav-actions > .nav-user,
+    .nav-actions > .nav-logout-form {
         display: none;
     }
 
@@ -157,6 +189,24 @@
 
     .mobile-menu .nav-user {
         margin: 4px 4px 2px;
+    }
+
+    .mobile-menu .nav-logout-form {
+        display: block;
+        margin-top: 4px;
+    }
+
+    .mobile-menu .nav-logout {
+        width: 100%;
+        padding: 11px 12px;
+        border: 0;
+        border-radius: 10px;
+        background: transparent;
+        text-align: left;
+    }
+
+    .mobile-menu .nav-logout:hover {
+        background: var(--surface-soft);
     }
 }
 

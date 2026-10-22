@@ -1,0 +1,22 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'core/logout.css' %}" />
+{% endblock style %}
+
+{% block content %}
+    <div class="container page">
+        <section class="logout-card">
+            <p class="logout-eyebrow">CasaListo</p>
+            <h1>Sesión cerrada</h1>
+            <p class="logout-intro">
+                Has salido correctamente de tu cuenta. Esperamos verte de nuevo pronto.
+            </p>
+            <div class="logout-actions">
+                <a class="btn btn-primary" href="{% url 'core:home' %}">Volver al inicio</a>
+                <a class="btn btn-ghost" href="{% url 'core:login' %}">Iniciar sesión</a>
+            </div>
+        </section>
+    </div>
+{% endblock content %}
