@@ -1,9 +1,13 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import LoginView
+from django.contrib.messages.api import success
+from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 
-# Create your views here.
+from core.forms import CustomLoginForm
 
 
 def te_saludo(request):
@@ -32,6 +36,13 @@ def login_view(request: HttpRequest) -> HttpResponse:
         error = "Usuario o contraseña incorrectos."
 
     return render(request, "core/login.html", {"error": error})
+
+
+class CustomLoginView(SuccessMessageMixin, LoginView):
+    template_name = "core/login.html"
+    form_class = CustomLoginForm
+    success_message = "Acceso correcto"
+    success_url = reverse_lazy("servicio:home")
 
 
 def logout_view(request: HttpRequest) -> HttpResponse:
