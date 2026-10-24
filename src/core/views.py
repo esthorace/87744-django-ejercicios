@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_not_required, login_required
 from django.contrib.auth.views import LoginView
 from django.contrib.messages.api import success
 from django.contrib.messages.views import SuccessMessageMixin
@@ -17,9 +18,14 @@ def te_saludo(request):
     return HttpResponse(f"<p>¡Hola {nombre}!</p>")
 
 
+# def home(request):
+#     lista_notas = [1, 10, 4, 7, 8, 5, 7]
+#     return render(request, "core/home.html", {"notas": lista_notas})
+
+
+@login_not_required
 def home(request):
-    lista_notas = [1, 10, 4, 7, 8, 5, 7]
-    return render(request, "core/home.html", {"notas": lista_notas})
+    return render(request, "core/home.html")
 
 
 def login_view(request: HttpRequest) -> HttpResponse:
